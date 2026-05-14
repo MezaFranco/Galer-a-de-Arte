@@ -1,0 +1,20 @@
+<h1>🎨 Mi Galería de Dibujos</h1>
+
+<!-- Formulario para AGREGAR -->
+<div class="formulario">
+  <h3>Agregar nuevo dibujo</h3>
+  <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
+  <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
+  <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
+  <button (click)="agregar()">➕ Agregar</button>
+</div>
+
+<!-- Galería -->
+<div class="galeria">
+  <div *ngFor="let dibujo of dibujos" class="tarjeta">
+    <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
+    <h3>{{ dibujo.titulo }}</h3>
+    <p>{{ dibujo.descripcion }}</p>
+    <button (click)="eliminar(dibujo.id!)">🗑️ Eliminar</button>
+  </div>
+</div>

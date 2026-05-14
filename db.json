@@ -1,0 +1,28 @@
+{
+  "drawings": [
+    {
+      "id": 1,
+      "title": "Paisaje nocturno",
+      "author": "Franco",
+      "date": "2024-05-10",
+      "category": "Digital",
+      "description": "Dibujo de paisaje con técnica digital",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 2,
+      "title": "Retrato",
+      "author": "Franco",
+      "date": "2024-06-15",
+      "category": "Tradicional",
+      "description": "Retrato a lápiz",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "titulo": "Picle Rick",
+      "descripcion": "No se ",
+      "imagenUrl": "https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fliterally-just-a-picture-of-pickle-rick-v0-dn1ag41tsucz.jpg%3Fauto%3Dwebp%26s%3Deaa33444b6765e7f8d3a04668c17bf8b8d8239a8",
+      "id": 3
+    }
+  ]
+}
