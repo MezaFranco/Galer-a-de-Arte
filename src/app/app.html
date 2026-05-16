@@ -18,3 +18,26 @@
     <button (click)="eliminar(dibujo.id!)">🗑️ Eliminar</button>
   </div>
 </div>
+
+<!-- HUD overlay -->
+<div class="hud" aria-hidden="true">
+  <div class="hud-top">
+    <div class="hud-left">
+      <ng-container *ngIf="dibujos?.length; else noMap">
+        <div class="minimap" [style.background-image]="'url(' + dibujos[0].imagenUrl + ')'" title="Miniatura"></div>
+      </ng-container>
+      <ng-template #noMap>
+        <div class="minimap empty">MAP</div>
+      </ng-template>
+    </div>
+    <div class="hud-right">
+      <div class="status">
+        <div class="badge">Dibujos</div>
+        <div class="counter">{{ dibujos?.length || 0 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="crosshair"></div>
+  <div class="scanline"></div>
+</div>
