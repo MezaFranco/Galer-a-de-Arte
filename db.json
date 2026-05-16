@@ -1,0 +1,23 @@
+{
+  "drawings": [
+    {
+      "id": "1",
+      "titulo": "Picle Rick",
+      "descripcion": "Dibujo de paisaje con técnica digital",
+      "imagenUrl": "assets/images/PiccoloRick.jpg"
+    },
+    {
+      "id": "2",
+      "titulo": "Pegatina",
+      "descripcion": "Retrato a lápiz",
+      "imagenUrl": "assets/images/PresaFacil.jpg"
+    },
+    {
+      "id": "3",
+      "titulo": "Picle Rick",
+      "descripcion": "No se",
+      "imagenUrl": "assets/images/Bestia1.jpg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
