@@ -17,6 +17,12 @@
       "titulo": "Picle Rick",
       "descripcion": "No se",
       "imagenUrl": "assets/images/Bestia1.jpg"
+    },
+    {
+      "titulo": "prueba4",
+      "descripcion": "tatatt",
+      "imagenUrl": "https://images.pexels.com/photos/31095029/pexels-photo-31095029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "id": "74AKls3DdZU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

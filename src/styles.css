@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+/* Fondo global táctico / oscuro */
+body {
+	background: radial-gradient(ellipse at top left, #0b1112 0%, #07090a 35%, #050506 100%);
+	color: #d7e6df;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Evita que componentes aislados sobrescriban el fondo */
+app-root, :root {
+	background: transparent;
+}
+
+/* Pequeña ayuda para enlaces y texto */
+a { color: #7fe9b1 }
