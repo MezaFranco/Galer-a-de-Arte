@@ -4,7 +4,7 @@ html, body {
 	margin: 0;
 }
 
-/* Fondo global táctico / oscuro */
+/* Fondo global/ oscuro */
 body {
 	background: radial-gradient(ellipse at top left, #0b1112 0%, #07090a 35%, #050506 100%);
 	color: #d7e6df;

@@ -1,15 +1,39 @@
-<h1>Galería de Dibujos</h1>
+<header class="topbar">
+  <h1>Galería de Dibujos</h1>
 
-<!-- Formulario para AGREGAR -->
-<div class="formulario">
-  <h3>Agregar nuevo dibujo</h3>
-  <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
-  <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
-  <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
-  <button (click)="agregar()">➕ Agregar</button>
+  <div class="menu-container" tabindex="0">
+    <button class="menu-trigger" aria-haspopup="true" aria-label="Menú de opciones" type="button" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="menu-dropdown" *ngIf="menuAbierto">
+      <button class="menu-item" type="button" (click)="openForm()">
+        ➕ Agregar imagen
+      </button>
+      <button class="menu-item secondary" type="button" (click)="menuAbierto = false">
+        ✖️ Cerrar menú
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="form-overlay" *ngIf="mostrarForm" (click)="mostrarForm = false">
+  <div class="formulario modal" (click)="$event.stopPropagation()">
+    <h3>Agregar nuevo dibujo</h3>
+    <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
+    <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
+    <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
+    <div class="form-actions">
+      <button type="button" (click)="agregar()" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : '➕ Agregar' }}
+      </button>
+      <button type="button" class="secondary" (click)="mostrarForm = false">Cancelar</button>
+    </div>
+  </div>
 </div>
 
-<!-- Galería -->
 <div class="galeria">
   <div *ngFor="let dibujo of dibujos" class="tarjeta">
     <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
@@ -19,25 +43,4 @@
   </div>
 </div>
 
-<!-- HUD overlay -->
-<div class="hud" aria-hidden="true">
-  <div class="hud-top">
-    <div class="hud-left">
-      <ng-container *ngIf="dibujos?.length; else noMap">
-        <div class="minimap" [style.background-image]="'url(' + dibujos[0].imagenUrl + ')'" title="Miniatura"></div>
-      </ng-container>
-      <ng-template #noMap>
-        <div class="minimap empty">MAP</div>
-      </ng-template>
-    </div>
-    <div class="hud-right">
-      <div class="status">
-        <div class="badge">Dibujos</div>
-        <div class="counter">{{ dibujos?.length || 0 }}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="crosshair"></div>
-  <div class="scanline"></div>
-</div>
+<div class="toast" [class.visible]="toastVisible">{{ toastMensaje }}</div>
