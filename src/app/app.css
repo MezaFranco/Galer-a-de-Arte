@@ -4,7 +4,7 @@
   --input-placeholder-color: #1cbbdc;
   --input-bg: rgba(255,255,255,0.02);
   color: #d7e6df;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Rajdhani", "Barlow", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .galeria {
@@ -51,7 +51,7 @@ img {
 }
 
 .titulo {
-  font-family: "Bebas Neue", cursive, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Rajdhani", "Bebas Neue", cursive, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.02rem;
   font-weight: 600;
   color: #e6fff2;
@@ -97,84 +97,114 @@ input:focus, textarea:focus, select:focus {
   border-color: rgba(0,200,120,0.25);
 }
 
+/* ========== ESTILOS DE BOTONES ========== */
 button {
   margin: 6px;
-  padding: 10px 18px;
+  padding: 11px 40px 9px;
   cursor: pointer;
-  background: linear-gradient(90deg, #b2e50f 0%, #00a36b 100%);
-  color: #061010;
-  border: none;
-  border-radius: 6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.4em;
+  font-family: "Rajdhani", "Barlow", sans-serif;
   font-weight: 600;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  letter-spacing: 1px;
+  line-height: 1;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  border-radius: 0;
+  transition: all 0.4s ease-out;
+}
+
+button:not(.secondary):not(.menu-trigger):not(.carrusel-mini-nav) {
+  background-color: transparent;
+  color: #b2e50f;
+  border-color: #b2e50f;
+}
+
+button:not(.secondary):not(.menu-trigger):not(.carrusel-mini-nav):hover {
+  background-color: #b2e50f;
+  color: #061010;
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 button.secondary {
-  background: transparent;
-  color: #cfe8df;
-  border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: none;
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+button.secondary:hover {
+  background-color: #fff;
+  color: #090a0a;
+  transform: scale(1.02);
+}
+
+.tarjeta button {
+  background-color: transparent;
+  color: #cd3737;
+  border-color: #cd3737;
+  padding: 8px 20px;
+  font-size: 1em;
+}
+
+.tarjeta button:hover {
+  background-color: #cd3737;
+  color: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(205, 55, 55, 0.6);
+}
+
+.formulario button {
+  background-color: transparent;
+  color: #b2e50f;
+  border-color: #b2e50f;
+  padding: 10px 32px;
+  font-size: 1.2em;
+}
+
+.formulario button:hover {
+  background-color: #b2e50f;
+  color: #061010;
+  transform: scale(1.02);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== TOPBAR ========== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 28px;
+  position: relative;
 }
 
 h1 {
   text-align: center;
   color: #1cbbdc;
   letter-spacing: 1px;
-  margin: 12px 0 6px 0;
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  font-size: 2em;
 }
 
-.badge {
-  background: rgba(0,200,120,0.12);
-  color: #bfffe0;
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(0,200,120,0.08);
-}
-
-.tarjeta button {
-  background: linear-gradient(90deg, #b2e50f 0%, #00a36b 100%);
-  transition: all 0.25s ease;
-}
-
-.tarjeta button:hover {
-  background: linear-gradient(90deg, #ff6f3f 0%, #e80909 100%);
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4);
-}
-
-.tarjeta button:active {
-  transform: scale(0.98);
-  transition: transform 0.05s ease;
-}
-
-.formulario button {
-  background: linear-gradient(90deg, #b2e50f 0%, #00a36b 100%);
-  transition: all 0.25s ease;
-}
-
-.formulario button:hover {
-  background: linear-gradient(90deg, #00b4d8 0%, #005f99 100%);
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 100, 150, 0.4);
-}
-
-.formulario button:active {
-  transform: scale(0.98);
-  transition: transform 0.05s ease;
-}
-
-.topbar {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-}
-
+/* ========== MENÚ DE ALTURA COMPLETA ========== */
 .menu-container {
-  position: relative;
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
+  z-index: 100;
 }
 
 .menu-trigger {
@@ -191,6 +221,8 @@ h1 {
   padding: 8px;
   cursor: pointer;
   transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  position: relative;
+  z-index: 101;
 }
 
 .menu-trigger:hover,
@@ -209,26 +241,30 @@ h1 {
 }
 
 .menu-dropdown {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  min-width: 220px;
-  margin-top: 4px;
-  background: rgba(10,12,13,0.96);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 10px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  margin-top: 0;
+  background: rgba(10,12,13,0.98);
+  border-right: 1px solid rgba(178,229,15,0.3);
+  border-radius: 0;
+  padding: 80px 20px 20px 20px;
   box-shadow: 0 18px 36px rgba(0,0,0,0.35);
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateX(-100%);
   pointer-events: none;
-  transition: opacity .18s ease, transform .18s ease;
-  z-index: 10;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.menu-dropdown {
+.menu-container:hover .menu-dropdown {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translateX(0) !important;
   pointer-events: auto !important;
 }
 
@@ -238,20 +274,34 @@ h1 {
   border: none;
   background: transparent;
   color: #e6f3eb;
-  padding: 12px 14px;
+  padding: 15px 20px;
   border-radius: 10px;
   cursor: pointer;
   transition: background .15s ease, color .15s ease;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .menu-item:hover {
-  background: rgba(0,200,120,0.12);
+  background: rgba(178,229,15,0.15);
+  color: #b2e50f;
 }
 
 .menu-item.secondary {
   color: #99c7b9;
+  margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
 }
 
+.menu-item.secondary:hover {
+  color: #b2e50f;
+}
+
+/* ========== FORMULARIO Y OTROS ========== */
 .form-overlay {
   position: fixed;
   inset: 0;
@@ -261,52 +311,6 @@ h1 {
   background: rgba(0,0,0,0.6);
   padding: 24px;
   z-index: 10010;
-}
-
-.debug-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #ffd54f;
-  color: #061010;
-  text-align: center;
-  padding: 8px 12px;
-  font-weight: 700;
-  z-index: 9999;
-}
-
-.formulario.modal {
-  width: min(480px, 100%);
-  padding: 24px;
-  max-width: 100%;
-}
-
-.formulario.modal.debug-visible {
-  background: linear-gradient(180deg, #ffffff, #f0f0f0);
-  color: #061010;
-  border-radius: 12px;
-  border: 4px solid #00796b;
-  box-shadow: 0 30px 80px rgba(3, 32, 30, 0.6);
-  z-index: 10100;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.form-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  background: rgba(0,0,0,0.75) !important;
-  z-index: 99999 !important;
 }
 
 .formulario.modal {
@@ -321,6 +325,14 @@ h1 {
   gap: 10px !important;
 }
 
+.form-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .toast {
   position: fixed;
   bottom: 100px;
@@ -331,14 +343,345 @@ h1 {
   font-weight: bold;
   font-size: 18px;
   padding: 16px 32px;
-  border-radius: 12px;
+  border-radius: 4px;
   z-index: 999999;
   text-align: center;
   white-space: nowrap;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   display: none;
+  font-family: "Rajdhani", "Barlow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .toast.visible {
   display: block;
+}
+
+.badge {
+  background: rgba(0,200,120,0.12);
+  color: #bfffe0;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(0,200,120,0.08);
+}
+
+/* ========== CARRUSEL TRIP OVERVIEW ========== */
+.carrusel-trip {
+  --card-width: 280px;
+  margin: 20px auto 40px auto;
+  padding: 0 28px;
+}
+
+.carrusel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carrusel-lista {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 1rem 0 2rem 0;
+  margin: 0;
+  list-style: none;
+  scrollbar-width: thin;
+}
+
+.carrusel-lista::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carrusel-lista::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+.carrusel-lista::-webkit-scrollbar-thumb {
+  background: #b2e50f;
+  border-radius: 3px;
+}
+
+.carrusel-item {
+  width: var(--card-width);
+  min-width: var(--card-width);
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #1a1a1a;
+}
+
+.carrusel-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.carrusel-item img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+}
+
+.carrusel-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+  padding: 50px 15px 15px 15px;
+  transform: translateY(calc(100% - 65px));
+  transition: transform 0.4s ease;
+}
+
+.carrusel-item:hover .carrusel-meta {
+  transform: translateY(0);
+}
+
+.carrusel-titulo {
+  font-size: 1.1rem;
+  margin: 0 0 6px 0;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  color: #b2e50f;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.carrusel-desc {
+  font-size: 0.75rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carrusel-puntos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.carrusel-puntos .punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carrusel-puntos .punto:hover {
+  background: rgba(178,229,15,0.6);
+  transform: scale(1.2);
+}
+
+.carrusel-puntos .punto.activo {
+  width: 24px;
+  border-radius: 4px;
+  background: #b2e50f;
+}
+
+@media (max-width: 768px) {
+  .carrusel-trip {
+    padding: 0 16px;
+  }
+  
+  .carrusel-item {
+    width: 240px;
+    min-width: 240px;
+  }
+  
+  .carrusel-titulo {
+    font-size: 0.95rem;
+  }
+  
+  .carrusel-desc {
+    font-size: 0.7rem;
+  }
+}
+
+/* Animación de desplazamiento continuo para el carrusel */
+.carrusel-lista {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Transición suave para los items */
+.carrusel-item {
+  transition: all 0.3s ease;
+}
+
+/* Efecto de entrada para nuevos items */
+.carrusel-item.ng-enter {
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ========== CARRUSEL QUE GIRA ========== */
+.carrusel-giratorio {
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto 40px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carrusel-contenedor {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.carrusel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carrusel-item-giratorio {
+  min-width: 100%;
+  position: relative;
+}
+
+.carrusel-item-giratorio img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.carrusel-info-giratorio {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 40px 20px 20px 20px;
+  color: white;
+}
+
+.carrusel-info-giratorio h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  color: #b2e50f;
+}
+
+.carrusel-info-giratorio p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.carrusel-btn:hover {
+  background: #b2e50f;
+  color: black;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carrusel-btn.prev {
+  left: 15px;
+}
+
+.carrusel-btn.next {
+  right: 15px;
+}
+
+.carrusel-indicadores {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.indicador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicador:hover {
+  background: rgba(178,229,15,0.8);
+  transform: scale(1.2);
+}
+
+.indicador.activo {
+  width: 25px;
+  border-radius: 5px;
+  background: #b2e50f;
+}
+
+@media (max-width: 768px) {
+  .carrusel-item-giratorio img {
+    height: 250px;
+  }
+  
+  .carrusel-info-giratorio h2 {
+    font-size: 1.1rem;
+  }
+  
+  .carrusel-info-giratorio p {
+    font-size: 0.7rem;
+  }
+  
+  .carrusel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DrawingService, Drawing } from './services/drawing';
@@ -10,7 +10,7 @@ import { DrawingService, Drawing } from './services/drawing';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   dibujos: Drawing[] = [];
   nuevoDibujo: Drawing = { titulo: '', descripcion: '', imagenUrl: '' };
   mostrarForm = false;
@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   guardando = false;
   toastVisible = false;
   toastMensaje = '';
+  indiceActual = 0;
+  private intervaloAuto: any;
 
   constructor(
     private drawingService: DrawingService,
@@ -26,11 +28,41 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.cargarGaleria();
+    this.iniciarAutoSlide();
+  }
+
+  ngOnDestroy() {
+    this.detenerAutoSlide();
+  }
+
+  iniciarAutoSlide() {
+    if (this.intervaloAuto) {
+      clearInterval(this.intervaloAuto);
+    }
+    this.intervaloAuto = setInterval(() => {
+      if (this.dibujos.length > 0) {
+        this.siguienteSlide();
+        this.cdr.detectChanges();
+      }
+    }, 4000);
+  }
+
+  detenerAutoSlide() {
+    if (this.intervaloAuto) {
+      clearInterval(this.intervaloAuto);
+      this.intervaloAuto = null;
+    }
+  }
+
+  reiniciarAutoSlide() {
+    this.detenerAutoSlide();
+    this.iniciarAutoSlide();
   }
 
   cargarGaleria() {
     this.drawingService.getDrawings().subscribe((data: Drawing[]) => {
       this.dibujos = data;
+      this.indiceActual = 0;
       this.cdr.detectChanges();
     });
   }
@@ -57,16 +89,52 @@ export class AppComponent implements OnInit {
     }, 3000);
   }
 
+  siguienteSlide() {
+    if (this.dibujos.length === 0) return;
+    // Avanzar al siguiente slide (derecha a izquierda)
+    this.indiceActual = (this.indiceActual + 1) % this.dibujos.length;
+    this.scrollAlSlide(this.indiceActual);
+    this.cdr.detectChanges();
+  }
+
+  anteriorSlide() {
+    if (this.dibujos.length === 0) return;
+    // Retroceder al slide anterior
+    this.indiceActual = (this.indiceActual - 1 + this.dibujos.length) % this.dibujos.length;
+    this.scrollAlSlide(this.indiceActual);
+    this.cdr.detectChanges();
+  }
+
+  irAlSlide(indice: number) {
+    this.indiceActual = indice;
+    this.reiniciarAutoSlide();
+    this.scrollAlSlide(indice);
+    this.cdr.detectChanges();
+  }
+
+  scrollAlSlide(indice: number) {
+    setTimeout(() => {
+      const elementos = document.querySelectorAll('.carrusel-item');
+      if (elementos && elementos[indice]) {
+        elementos[indice].scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'nearest', 
+          inline: 'center' 
+        });
+      }
+    }, 50);
+  }
+
   agregar() {
     if (this.guardando) return;
     
     if (!this.nuevoDibujo.titulo.trim()) {
-      this.mostrarToast('❌ El título es obligatorio');
+      this.mostrarToast('El título es obligatorio');
       return;
     }
     
     if (!this.nuevoDibujo.imagenUrl.trim()) {
-      this.mostrarToast('❌ La URL de la imagen es obligatoria');
+      this.mostrarToast('La URL de la imagen es obligatoria');
       return;
     }
     
@@ -85,14 +153,17 @@ export class AppComponent implements OnInit {
     this.menuAbierto = false;
     this.nuevoDibujo = { titulo: '', descripcion: '', imagenUrl: '' };
     this.guardando = false;
-    this.mostrarToast('✅ Dibujo guardado correctamente');
+    this.mostrarToast('Imagen guardada correctamente');
     this.cdr.detectChanges();
   }
 
   eliminar(id: string) {
-    if (confirm('¿Eliminar este dibujo?')) {
+    if (confirm('¿Eliminar esta imagen?')) {
       this.dibujos = this.dibujos.filter(d => d.id !== id);
-      this.mostrarToast('🗑️ Dibujo eliminado');
+      if (this.indiceActual >= this.dibujos.length && this.dibujos.length > 0) {
+        this.indiceActual = this.dibujos.length - 1;
+      }
+      this.mostrarToast('Imagen eliminada');
       this.cdr.detectChanges();
     }
   }

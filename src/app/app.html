@@ -1,5 +1,5 @@
 <header class="topbar">
-  <h1>Galería de Dibujos</h1>
+  <h1>Galería de Imagenes</h1>
 
   <div class="menu-container" tabindex="0">
     <button class="menu-trigger" aria-haspopup="true" aria-label="Menú de opciones" type="button" (click)="toggleMenu()">
@@ -10,10 +10,7 @@
 
     <div class="menu-dropdown" *ngIf="menuAbierto">
       <button class="menu-item" type="button" (click)="openForm()">
-        ➕ Agregar imagen
-      </button>
-      <button class="menu-item secondary" type="button" (click)="menuAbierto = false">
-        ✖️ Cerrar menú
+        Agregar imagen
       </button>
     </div>
   </div>
@@ -21,16 +18,40 @@
 
 <div class="form-overlay" *ngIf="mostrarForm" (click)="mostrarForm = false">
   <div class="formulario modal" (click)="$event.stopPropagation()">
-    <h3>Agregar nuevo dibujo</h3>
+    <h3>Agregar nueva dibujo</h3>
     <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
     <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
     <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
     <div class="form-actions">
       <button type="button" (click)="agregar()" [disabled]="guardando">
-        {{ guardando ? 'Guardando...' : '➕ Agregar' }}
+        {{ guardando ? 'Guardando...' : 'Agregar' }}
       </button>
       <button type="button" class="secondary" (click)="mostrarForm = false">Cancelar</button>
     </div>
+  </div>
+</div>
+
+<!-- CARRUSEL TRIP OVERVIEW -->
+<div class="carrusel-trip" *ngIf="dibujos.length > 0">
+  <div class="carrusel-wrapper">
+    <ul class="carrusel-lista">
+      <li *ngFor="let dibujo of dibujos; let i = index" 
+          class="carrusel-item"
+          (click)="irAlSlide(i)">
+        <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
+        <div class="carrusel-meta">
+          <h2 class="carrusel-titulo">{{ dibujo.titulo }}</h2>
+          <p class="carrusel-desc">{{ dibujo.descripcion }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="carrusel-puntos">
+    <span *ngFor="let dibujo of dibujos; let i = index" 
+          class="punto" 
+          [class.activo]="i === indiceActual"
+          (click)="irAlSlide(i)"></span>
   </div>
 </div>
 
@@ -39,7 +60,7 @@
     <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
     <h3>{{ dibujo.titulo }}</h3>
     <p>{{ dibujo.descripcion }}</p>
-    <button (click)="eliminar(dibujo.id!)">🗑️ Eliminar</button>
+    <button (click)="eliminar(dibujo.id!)">Eliminar</button>
   </div>
 </div>
 
