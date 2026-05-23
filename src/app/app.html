@@ -18,7 +18,7 @@
 
 <div class="form-overlay" *ngIf="mostrarForm" (click)="mostrarForm = false">
   <div class="formulario modal" (click)="$event.stopPropagation()">
-    <h3>Agregar nueva dibujo</h3>
+    <h3>Agregar nueva imagen</h3>
     <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
     <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
     <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
@@ -31,37 +31,39 @@
   </div>
 </div>
 
-<!-- CARRUSEL TRIP OVERVIEW -->
+<!-- CARRUSEL -->
 <div class="carrusel-trip" *ngIf="dibujos.length > 0">
-  <div class="carrusel-wrapper">
-    <ul class="carrusel-lista">
-      <li *ngFor="let dibujo of dibujos; let i = index" 
-          class="carrusel-item"
-          (click)="irAlSlide(i)">
-        <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
-        <div class="carrusel-meta">
-          <h2 class="carrusel-titulo">{{ dibujo.titulo }}</h2>
-          <p class="carrusel-desc">{{ dibujo.descripcion }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="carrusel-puntos">
-    <span *ngFor="let dibujo of dibujos; let i = index" 
-          class="punto" 
-          [class.activo]="i === indiceActual"
-          (click)="irAlSlide(i)"></span>
-  </div>
+  <ul class="carousel" #carouselRef>
+    <li
+      *ngFor="let dibujo of dibujos; let i = index"
+      class="day-card"
+      [attr.data-num]="'#' + (i + 1)"
+    >
+      <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo" (click)="abrirLightbox(dibujo)">
+      <div class="meta">
+        <h2>{{ dibujo.titulo }}</h2>
+        <p class="desc">{{ dibujo.descripcion }}</p>
+      </div>
+    </li>
+  </ul>
 </div>
+
+<div class="seccion-titulo">Todas las imágenes</div>
 
 <div class="galeria">
   <div *ngFor="let dibujo of dibujos" class="tarjeta">
-    <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo">
+    <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo" (click)="abrirLightbox(dibujo)">
     <h3>{{ dibujo.titulo }}</h3>
     <p>{{ dibujo.descripcion }}</p>
     <button (click)="eliminar(dibujo.id!)">Eliminar</button>
   </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" *ngIf="lightboxAbierto" (click)="cerrarLightbox()">
+  <button class="lightbox-cerrar" (click)="cerrarLightbox()">✕</button>
+  <img [src]="lightboxImagen" [alt]="lightboxTitulo" (click)="$event.stopPropagation()">
+  <div class="lightbox-titulo">{{ lightboxTitulo }}</div>
 </div>
 
 <div class="toast" [class.visible]="toastVisible">{{ toastMensaje }}</div>

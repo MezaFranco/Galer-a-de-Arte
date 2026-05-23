@@ -1,26 +1,35 @@
+/* ============================================
+   VARIABLES GLOBALES Y ESTILOS BASE
+   ============================================ */
 :host {
   display: block;
-  --input-text-color: #e6f3eb;
-  --input-placeholder-color: #1cbbdc;
-  --input-bg: rgba(255,255,255,0.02);
-  color: #d7e6df;
+  --input-text-color: #e6f3eb;           /* Color del texto dentro de inputs */
+  --input-placeholder-color: #edededae;   /* Color del placeholder */
+  --input-bg: rgba(255,255,255,0.02);     /* Fondo semi-transparente para inputs */
+  color: #d7e6df;                         /* Color base del texto */
   font-family: "Rajdhani", "Barlow", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* ============================================
+   GALERÍA PRINCIPAL (Grid de tarjetas)
+   ============================================ */
 .galeria {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));  /* Responsive: mínimo 240px por tarjeta */
+  gap: 18px;                               /* Espacio entre tarjetas */
   padding: 28px;
-  background: linear-gradient(180deg, #07090a 0%, #0e1112 100%);
-  min-height: calc(100vh - 180px);
+  background: linear-gradient(180deg, #07090a 0%, #0e1112 100%); /* Fondo degradado oscuro */
+  min-height: calc(100vh - 180px);         /* Altura mínima restando el topbar */
   box-sizing: border-box;
 }
 
+/* ============================================
+   TARJETA (Cada imagen con su información)
+   ============================================ */
 .tarjeta {
   background: linear-gradient(180deg, rgba(30,33,36,0.95), rgba(18,20,22,0.9));
   border: 1px solid rgba(255,255,255,0.04);
-  border-left: 4px solid #b2e50f;
+  border-left: 4px solid #7fa921;          /* Borde izquierdo verde brillante (acento) */
   border-radius: 8px;
   padding: 12px;
   text-align: left;
@@ -29,15 +38,19 @@
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
+/* Efecto hover: la tarjeta se levanta ligeramente */
 .tarjeta:hover {
   transform: translateY(-6px) scale(1.01);
   box-shadow: 0 16px 40px rgba(0,0,0,0.85), 0 0 12px rgba(0,200,120,0.06);
 }
 
+/* ============================================
+   IMÁGENES DE LAS TARJETAS
+   ============================================ */
 img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 180px;                           /* Altura fija para uniformidad */
+  object-fit: cover;                       /* La imagen cubre el espacio sin deformarse */
   border-radius: 4px;
   border: 1px solid rgba(255,255,255,0.03);
   background: #07090a;
@@ -63,28 +76,43 @@ img {
   margin-top: 6px;
 }
 
+/* ============================================
+   FORMULARIO MODAL (Panel de agregar imagen)
+   ============================================ */
 .formulario {
-  padding: 18px;
-  background: linear-gradient(180deg, rgba(10,12,13,0.6), rgba(6,7,8,0.6));
+  padding: 24px;
+  background: linear-gradient(135deg, #0f1722 0%, #0a0f16 100%); /* Fondo azulado oscuro elegante */
   margin: 18px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 16px;                     /* Bordes más redondeados */
+  border: 1px solid rgba(28, 187, 220, 0.25); /* Borde con tono #1cbbdc */
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
+/* Título del formulario */
+.formulario h3 {
+  color: #1cbbdc;                          /* Título en azul eléctrico */
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Estilos de inputs, textareas y selects */
 input, textarea, select {
   margin: 6px;
   padding: 10px;
   width: 220px;
   max-width: 100%;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(28, 187, 220, 0.3);
   background: var(--input-bg);
   color: var(--input-text-color);
-  border-radius: 6px;
+  border-radius: 8px;
   outline: none;
   transition: box-shadow .12s ease, border-color .12s ease;
 }
 
+/* Color del placeholder */
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
@@ -92,17 +120,20 @@ select::placeholder {
   opacity: 1;
 }
 
+/* Efecto focus: resplandor azul sutil */
 input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 10px rgba(0,200,120,0.12);
-  border-color: rgba(0,200,120,0.25);
+  box-shadow: 0 0 10px rgba(28, 187, 220, 0.25);
+  border-color: #1cbbdc;
 }
 
-/* ========== ESTILOS DE BOTONES ========== */
+/* ============================================
+   BOTONES (ESTILO BASE Y VARIANTES)
+   ============================================ */
 button {
   margin: 6px;
   padding: 11px 40px 9px;
   cursor: pointer;
-  text-transform: uppercase;
+  text-transform: uppercase;               /* Texto en mayúsculas */
   text-decoration: none;
   font-size: 1.4em;
   font-family: "Rajdhani", "Barlow", sans-serif;
@@ -114,71 +145,62 @@ button {
   justify-content: center;
   align-items: center;
   border: 2px solid;
-  border-radius: 0;
+  border-radius: 0;                        /* Bordes rectos (estilo industrial) */
   transition: all 0.4s ease-out;
 }
 
-button:not(.secondary):not(.menu-trigger):not(.carrusel-mini-nav) {
+/* ========== BOTÓN AGREGAR (dentro del formulario) ========== */
+.formulario button:not(.secondary) {
   background-color: transparent;
-  color: #b2e50f;
-  border-color: #b2e50f;
+  color: #1cbbdc;                          /* Texto azul eléctrico */
+  border-color: #1cbbdc;                   /* Borde azul */
 }
 
-button:not(.secondary):not(.menu-trigger):not(.carrusel-mini-nav):hover {
-  background-color: #b2e50f;
-  color: #061010;
-  transform: scale(1.02);
+.formulario button:not(.secondary):hover {
+  background-color: #1cbbdc; /* Fondo azul al hover */
+  color: #061010;        /* Texto oscuro */
+  transform: scale(1.02);  /* Pequeño zoom */
   cursor: pointer;
 }
 
-button.secondary {
-  background-color: transparent;
-  color: #fff;
-  border-color: #fff;
-}
-
-button.secondary:hover {
-  background-color: #fff;
-  color: #090a0a;
-  transform: scale(1.02);
-}
-
+/* BOTÓN ELIMINAR (dentro de tarjetas)*/
 .tarjeta button {
   background-color: transparent;
-  color: #cd3737;
-  border-color: #cd3737;
+  color: #ffffff;        /* Texto blanco */
+  border-color: #d50000; /* Borde rojo */
   padding: 8px 20px;
   font-size: 1em;
 }
 
 .tarjeta button:hover {
-  background-color: #cd3737;
-  color: #fff;
+  background-color: #cd3737;   
+  border-color: #cd3737; /* Fondo rojo al hover */
+  color: #000000;      /* Texto negro */
   transform: scale(1.02);
-  box-shadow: 0 0 12px rgba(205, 55, 55, 0.6);
+  box-shadow: 0 0 12px rgba(205, 55, 55, 0.6); /* Sombra roja */
 }
 
-.formulario button {
+/* BOTÓN SECUNDARIO (Cancelar, Cerrar menú) */
+button.secondary {
   background-color: transparent;
-  color: #b2e50f;
-  border-color: #b2e50f;
-  padding: 10px 32px;
-  font-size: 1.2em;
+  color: #fff;        /* Texto blanco */
+  border-color: #fff; /* Borde blanco */
 }
 
-.formulario button:hover {
-  background-color: #b2e50f;
-  color: #061010;
+button.secondary:hover {
+  background-color: #fff; /* Fondo blanco al hover */
+  color: #090a0a;         /* Texto oscuro */
   transform: scale(1.02);
 }
 
+/* BOTÓN DESHABILITADO */
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
 
-/* ========== TOPBAR ========== */
+/* TOPBAR (Barra superior con título y menú)*/
 .topbar {
   display: flex;
   align-items: center;
@@ -197,7 +219,7 @@ h1 {
   font-size: 2em;
 }
 
-/* ========== MENÚ DE ALTURA COMPLETA ========== */
+/*  MENÚ DE HAMBURGUESA (Altura completa)*/
 .menu-container {
   position: absolute;
   left: 28px;
@@ -207,12 +229,13 @@ h1 {
   z-index: 100;
 }
 
+/* Botón hamburguesa (tres rayas) */
 .menu-trigger {
   width: 46px;
   height: 42px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
+  background: rgba(254, 0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 0px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -232,6 +255,7 @@ h1 {
   background: rgba(0,200,120,0.08);
 }
 
+/* Las tres líneas del botón hamburguesa */
 .menu-trigger span {
   display: block;
   width: 24px;
@@ -240,12 +264,13 @@ h1 {
   background: #d7e6df;
 }
 
+/* Menú desplegable que ocupa toda la altura de la pantalla */
 .menu-dropdown {
   position: fixed;
   left: 0;
   top: 0;
   width: 280px;
-  height: 100vh;
+  height: 100vh; /* Altura completa de la ventana */
   margin-top: 0;
   background: rgba(10,12,13,0.98);
   border-right: 1px solid rgba(178,229,15,0.3);
@@ -253,7 +278,7 @@ h1 {
   padding: 80px 20px 20px 20px;
   box-shadow: 0 18px 36px rgba(0,0,0,0.35);
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* Oculto fuera de la pantalla */
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 99;
@@ -262,12 +287,14 @@ h1 {
   gap: 10px;
 }
 
+/* Al hacer hover sobre el contenedor, el menú se desliza */
 .menu-container:hover .menu-dropdown {
   opacity: 1 !important;
   transform: translateX(0) !important;
   pointer-events: auto !important;
 }
 
+/* Items del menú */
 .menu-item {
   width: 100%;
   text-align: left;
@@ -290,9 +317,10 @@ h1 {
   color: #b2e50f;
 }
 
+/* Botón "Cerrar menú" se posiciona al final */
 .menu-item.secondary {
   color: #99c7b9;
-  margin-top: auto;
+  margin-top: auto;    /* Empuja hacia abajo */
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 20px;
 }
@@ -301,10 +329,10 @@ h1 {
   color: #b2e50f;
 }
 
-/* ========== FORMULARIO Y OTROS ========== */
+/* OVERLAY DEL FORMULARIO */
 .form-overlay {
   position: fixed;
-  inset: 0;
+  inset: 0;       /* Cubre toda la pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -313,16 +341,18 @@ h1 {
   z-index: 10010;
 }
 
+/* Modal del formulario */
 .formulario.modal {
-  background: #1a2a22 !important;
-  border: 1px solid rgba(0,200,120,0.3) !important;
-  border-radius: 12px !important;
-  padding: 28px !important;
-  width: min(420px, 90vw) !important;
+  background: linear-gradient(135deg, #000000 0%, #171a1a 100%) !important;
+  border: 1px solid #1cbbdc59 !important;
+  border-radius: 20px !important;
+  padding: 32px !important;
+  width: min(450px, 90vw) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 15px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
 }
 
 .form-actions {
@@ -333,6 +363,7 @@ h1 {
   margin-top: 12px;
 }
 
+/* TOAST (Notificación temporal) */
 .toast {
   position: fixed;
   bottom: 100px;
@@ -348,14 +379,14 @@ h1 {
   text-align: center;
   white-space: nowrap;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  display: none;
+  display: none; /* Oculto por defecto */
   font-family: "Rajdhani", "Barlow", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .toast.visible {
-  display: block;
+  display: block; /* Visible cuando tiene la clase */
 }
 
 .badge {
@@ -367,321 +398,200 @@ h1 {
   border: 1px solid rgba(0,200,120,0.08);
 }
 
-/* ========== CARRUSEL TRIP OVERVIEW ========== */
+/* CARRUSEL TIPO TRIP (Estilo tarjetas horizontales) */
 .carrusel-trip {
-  --card-width: 280px;
-  margin: 20px auto 40px auto;
-  padding: 0 28px;
-}
-
-.carrusel-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.carrusel-lista {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 1rem 0 2rem 0;
+  --card-width: 260px; /* Ancho fijo para cada tarjeta */
+  padding: 0;
   margin: 0;
+  background: #07090a;
+}
+
+/* Contenedor del carrusel con scroll horizontal */
+.carousel {
+  display: grid;
+  gap: 1.5rem;
+  grid-auto-flow: column;        /* Disposición horizontal */
+  scroll-snap-type: x mandatory; /* Snap horizontal obligatorio */
+  overflow-x: auto;
+  width: 100%;
+  scroll-behavior: smooth;
+  scrollbar-width: none;         /* Oculta scrollbar en Firefox */
+  padding: 1.5rem 2rem 2rem 2rem;
   list-style: none;
-  scrollbar-width: thin;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.carrusel-lista::-webkit-scrollbar {
-  height: 6px;
+/* Oculta scrollbar en Chrome/Safari */
+.carousel::-webkit-scrollbar {
+  display: none;
 }
 
-.carrusel-lista::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border-radius: 3px;
-}
-
-.carrusel-lista::-webkit-scrollbar-thumb {
-  background: #b2e50f;
-  border-radius: 3px;
-}
-
-.carrusel-item {
+/* Cada tarjeta del carrusel */
+.day-card {
   width: var(--card-width);
-  min-width: var(--card-width);
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  scroll-snap-align: start;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: #1a1a1a;
+  scroll-snap-align: center;
+  border-left: 3px solid #7fa921; /* Borde izquierdo verde más suave */
 }
 
-.carrusel-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-}
-
-.carrusel-item img {
-  width: 100%;
+.day-card img {
   aspect-ratio: 4/5;
   object-fit: cover;
+  width: 100%;
   display: block;
+  height: auto;
+  filter: brightness(0.8);  /* Oscurece ligeramente la imagen */
+  border-radius: 0;
+  cursor: pointer;
 }
 
-.carrusel-meta {
+/* Información que se revela al hacer hover */
+.day-card .meta {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-  padding: 50px 15px 15px 15px;
-  transform: translateY(calc(100% - 65px));
-  transition: transform 0.4s ease;
+  transform: translateY(calc(100% - 3.2rem)); /* Mayormente oculta */
+  background: rgba(10,12,13,0.96);
+  border-top: 2px solid #7fa921;
+  color: #d7e6df;
+  padding: 1rem;
+  transition: transform 0.45s ease;
+  box-sizing: border-box;
 }
 
-.carrusel-item:hover .carrusel-meta {
+/* Al hacer hover, la información se muestra completamente */
+.day-card:hover .meta {
   transform: translateY(0);
 }
 
-.carrusel-titulo {
-  font-size: 1.1rem;
-  margin: 0 0 6px 0;
+.day-card .meta h2 {
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #7fa921;
+  font-family: "Rajdhani", sans-serif;
+}
+
+.day-card .meta .desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #b7c9c1;
+}
+
+/* Etiqueta numérica en la esquina superior izquierda */
+.day-card::before {
+  content: attr(data-num);
+  font-size: 0.75rem;
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+  background: rgba(10,12,13,0.9);
+  color: #b2e50f;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0 6px 6px 0;
   font-family: "Rajdhani", sans-serif;
   font-weight: 600;
-  color: #b2e50f;
   letter-spacing: 1px;
   text-transform: uppercase;
+  z-index: 2;
 }
 
-.carrusel-desc {
-  font-size: 0.75rem;
-  margin: 0;
-  opacity: 0.9;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.carrusel-puntos {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.carrusel-puntos .punto {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carrusel-puntos .punto:hover {
-  background: rgba(178,229,15,0.6);
-  transform: scale(1.2);
-}
-
-.carrusel-puntos .punto.activo {
-  width: 24px;
-  border-radius: 4px;
-  background: #b2e50f;
-}
-
-@media (max-width: 768px) {
-  .carrusel-trip {
-    padding: 0 16px;
-  }
-  
-  .carrusel-item {
-    width: 240px;
-    min-width: 240px;
-  }
-  
-  .carrusel-titulo {
-    font-size: 0.95rem;
-  }
-  
-  .carrusel-desc {
-    font-size: 0.7rem;
-  }
-}
-
-/* Animación de desplazamiento continuo para el carrusel */
-.carrusel-lista {
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Transición suave para los items */
-.carrusel-item {
-  transition: all 0.3s ease;
-}
-
-/* Efecto de entrada para nuevos items */
-.carrusel-item.ng-enter {
-  animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* ========== CARRUSEL QUE GIRA ========== */
-.carrusel-giratorio {
-  position: relative;
-  max-width: 800px;
-  margin: 20px auto 40px auto;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.carrusel-contenedor {
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.carrusel-slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carrusel-item-giratorio {
-  min-width: 100%;
-  position: relative;
-}
-
-.carrusel-item-giratorio img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
-
-.carrusel-info-giratorio {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-  padding: 40px 20px 20px 20px;
-  color: white;
-}
-
-.carrusel-info-giratorio h2 {
-  margin: 0 0 8px 0;
-  font-size: 1.5rem;
+/* Título de sección decorativo */
+.seccion-titulo {
+  padding: 18px 28px 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b2e50f80;
+  border-top: 1px solid rgba(178,229,15,0.06);
   font-family: "Rajdhani", sans-serif;
-  color: #b2e50f;
 }
 
-.carrusel-info-giratorio p {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-.carrusel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
+/* LIGHTBOX (Visor de imágenes ampliadas)*/
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  z-index: 99999;
+  cursor: default;
+  animation: fadeInLightbox 0.2s ease;
 }
 
-.carrusel-btn:hover {
-  background: #b2e50f;
-  color: black;
-  transform: translateY(-50%) scale(1.1);
+/* Animación de entrada del lightbox */
+@keyframes fadeInLightbox {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.carrusel-btn.prev {
-  left: 15px;
+.lightbox-overlay img {
+  max-width: 90vw !important;
+  max-height: 88vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border: 2px solid rgba(178,229,15,0.25);
+  border-radius: 4px;
+  cursor: default;
+  background: transparent !important;
+  filter: none !important;
 }
 
-.carrusel-btn.next {
-  right: 15px;
-}
-
-.carrusel-indicadores {
+/* Título de la imagen en el lightbox */
+.lightbox-titulo {
   position: absolute;
-  bottom: 15px;
-  left: 0;
-  right: 0;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #7fa921;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(10,12,13,0.88);
+  padding: 8px 20px;
+  border-top: 2px solid #7fa921;
+  white-space: nowrap;
+}
+
+/* Botón de cerrar lightbox */
+.lightbox-cerrar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: transparent;
+  border: 1.5px solid rgba(178,229,15,0.4);
+  color: #b2e50f;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-  z-index: 10;
-}
-
-.indicador {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.5);
   cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  transition: all 0.2s ease;
 }
 
-.indicador:hover {
-  background: rgba(178,229,15,0.8);
-  transform: scale(1.2);
-}
-
-.indicador.activo {
-  width: 25px;
-  border-radius: 5px;
+.lightbox-cerrar:hover {
   background: #b2e50f;
+  color: #061010;
 }
 
-@media (max-width: 768px) {
-  .carrusel-item-giratorio img {
-    height: 250px;
-  }
-  
-  .carrusel-info-giratorio h2 {
-    font-size: 1.1rem;
-  }
-  
-  .carrusel-info-giratorio p {
-    font-size: 0.7rem;
-  }
-  
-  .carrusel-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-  }
+/* Cursor pointer para las imágenes de las tarjetas (indica que se pueden ampliar) */
+.tarjeta img {
+  cursor: pointer;
 }

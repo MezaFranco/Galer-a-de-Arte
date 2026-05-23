@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface Drawing {
   id?: string;
@@ -13,42 +13,19 @@ export interface Drawing {
   providedIn: 'root'
 })
 export class DrawingService {
-  private drawingsLocal: Drawing[] = [
-    {
-      id: "1",
-      titulo: "Picle Rick",
-      descripcion: "Dibujo de paisaje con técnica digital",
-      imagenUrl: "assets/images/PiccoloRick.jpg"
-    },
-    {
-      id: "2",
-      titulo: "Pegatina",
-      descripcion: "Retrato a lápiz",
-      imagenUrl: "assets/images/PresaFacil.jpg"
-    },
-    {
-      id: "3",
-      titulo: "Picle Rick",
-      descripcion: "No se",
-      imagenUrl: "assets/images/Bestia1.jpg"
-    }
-  ];
+  private apiUrl = 'http://localhost:3000/drawings';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
   getDrawings(): Observable<Drawing[]> {
-    return of([...this.drawingsLocal]).pipe(delay(300));
+    return this.http.get<Drawing[]>(this.apiUrl);
   }
 
   addDrawing(drawing: Drawing): Observable<Drawing> {
-    const newId = Math.random().toString(36).substring(2, 10);
-    const newDrawing = { ...drawing, id: newId };
-    this.drawingsLocal.push(newDrawing);
-    return of(newDrawing).pipe(delay(500));
+    return this.http.post<Drawing>(this.apiUrl, drawing);
   }
 
   deleteDrawing(id: string): Observable<void> {
-    this.drawingsLocal = this.drawingsLocal.filter(d => d.id !== id);
-    return of(void 0).pipe(delay(300));
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
