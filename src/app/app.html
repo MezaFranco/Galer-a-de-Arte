@@ -16,22 +16,21 @@
   </div>
 </header>
 
-<div class="form-overlay" *ngIf="mostrarForm" (click)="mostrarForm = false">
+<div class="form-overlay" *ngIf="mostrarForm" (click)="cerrarFormulario()">
   <div class="formulario modal" (click)="$event.stopPropagation()">
-    <h3>Agregar nueva imagen</h3>
+    <h3>{{ editando ? 'Modificar imagen' : 'Agregar nueva imagen' }}</h3>
     <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
     <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
     <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
     <div class="form-actions">
       <button type="button" (click)="agregar()" [disabled]="guardando">
-        {{ guardando ? 'Guardando...' : 'Agregar' }}
+        {{ guardando ? 'Guardando...' : (editando ? 'Actualizar' : 'Agregar') }}
       </button>
-      <button type="button" class="secondary" (click)="mostrarForm = false">Cancelar</button>
+      <button type="button" class="secondary" (click)="cerrarFormulario()">Cancelar</button>
     </div>
   </div>
 </div>
 
-<!-- CARRUSEL -->
 <div class="carrusel-trip" *ngIf="dibujos.length > 0">
   <ul class="carousel" #carouselRef>
     <li
@@ -55,11 +54,14 @@
     <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo" (click)="abrirLightbox(dibujo)">
     <h3>{{ dibujo.titulo }}</h3>
     <p>{{ dibujo.descripcion }}</p>
-    <button (click)="eliminar(dibujo.id!)">Eliminar</button>
+    
+    <div class="tarjeta-actions">
+      <button class="btn-editar" (click)="editar(dibujo)">Editar</button>
+      <button class="btn-eliminar" (click)="eliminar(dibujo.id!)">Eliminar</button>
+    </div>
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox-overlay" *ngIf="lightboxAbierto" (click)="cerrarLightbox()">
   <button class="lightbox-cerrar" (click)="cerrarLightbox()">✕</button>
   <img [src]="lightboxImagen" [alt]="lightboxTitulo" (click)="$event.stopPropagation()">

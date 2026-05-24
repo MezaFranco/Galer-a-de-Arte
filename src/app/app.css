@@ -582,3 +582,48 @@ h1 {
 .tarjeta img {
   cursor: pointer;
 }
+
+/* CONTENEDOR DE BOTONES EN LA TARJETA */
+.tarjeta-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Redefinimos los botones internos de la tarjeta para que compartan proporciones */
+.tarjeta-actions button {
+  flex: 1; /* Hace que ambos botones midan lo mismo */
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* BOTÓN EDITAR (Estilo cian/azul cyberpunk) */
+.tarjeta-actions .btn-editar {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #1cbbdc;
+}
+
+.tarjeta-actions .btn-editar:hover {
+  background-color: #1cbbdc;
+  border-color: #1cbbdc;
+  color: #000000;
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(28, 187, 220, 0.6);
+}
+
+/* BOTÓN ELIMINAR (Mantenemos tu estilo rojo original) */
+.tarjeta-actions .btn-eliminar {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #cd3737;
+}
+
+.tarjeta-actions .btn-eliminar:hover {
+  background-color: #cd3737;
+  border-color: #cd3737;
+  color: #000000;
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(205, 55, 55, 0.6);
+}

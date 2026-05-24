@@ -28,4 +28,9 @@ export class DrawingService {
   deleteDrawing(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  // Aquí está el método completo y bien cerrado:
+  updateDrawing(drawing: Drawing): Observable<Drawing> {
+    return this.http.put<Drawing>(`${this.apiUrl}/${drawing.id}`, drawing);
+  }
 }
