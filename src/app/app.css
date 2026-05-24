@@ -1,10 +1,10 @@
 /* VARIABLES GLOBALES Y ESTILOS BASE */
 :host {
   display: block;
-  --input-text-color: #e6f3eb;           /* Color del texto dentro de inputs */
-  --input-placeholder-color: #edededae;   /* Color del placeholder */
-  --input-bg: rgba(255,255,255,0.02);     /* Fondo semi-transparente para inputs */
-  color: #d7e6df;                         /* Color base del texto */
+  --input-text-color: #e6f3eb; /* Color del texto dentro de inputs */
+  --input-placeholder-color: #edededae; /* Color del placeholder */
+  --input-bg: rgba(255,255,255,0.02); /* Fondo semi-transparente para inputs */
+  color: #d7e6df;  /* Color base del texto */
   font-family: "Rajdhani", "Barlow", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -154,7 +154,7 @@ button {
 /* BOTÓN ELIMINAR (dentro de tarjetas)*/
 .tarjeta button {
   background-color: transparent;
-  color: #ffffff;        /* Texto blanco */
+  color: #fff;        /* Texto blanco */
   border-color: #cd3737; /* Borde rojo */
   padding: 8px 20px;
   font-size: 1em;
@@ -601,22 +601,22 @@ h1 {
 /* BOTÓN EDITAR (Estilo cian/azul cyberpunk) */
 .tarjeta-actions .btn-editar {
   background-color: transparent;
-  color: #ffffff;
-  border-color: #1cbbdc;
+  color: #fff;        /* Texto blanco */
+  border-color: #fff;
 }
 
 .tarjeta-actions .btn-editar:hover {
-  background-color: #1cbbdc;
-  border-color: #1cbbdc;
+  background-color: #fff;
+  border-color: #fff;
   color: #000000;
   transform: scale(1.02);
-  box-shadow: 0 0 12px rgba(28, 187, 220, 0.6);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 /* BOTÓN ELIMINAR (Mantenemos tu estilo rojo original) */
 .tarjeta-actions .btn-eliminar {
   background-color: transparent;
-  color: #ffffff;
+  color: #fff; /* Texto blanco */
   border-color: #cd3737;
 }
 

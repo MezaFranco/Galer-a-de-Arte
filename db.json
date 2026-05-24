@@ -2,38 +2,32 @@
   "drawings": [
     {
       "id": "1",
-      "titulo": "Picle Rick",
-      "descripcion": "Dibujo de paisaje con técnica digital",
+      "titulo": "Piccolo Rick",
+      "descripcion": "Crossover digital diseñado en Krita que mezcla los universos de Dragon Ball Z y Rick and Morty. Una pieza colorida y llena de humor.",
       "imagenUrl": "assets/images/PiccoloRick.jpg"
     },
     {
       "id": "2",
-      "titulo": "Pegatina",
-      "descripcion": "Retrato a lápiz",
+      "titulo": "Presa Fácil",
+      "descripcion": "Quién es la verdadera presa?",
       "imagenUrl": "assets/images/PresaFacil.jpg"
     },
     {
       "id": "3",
-      "titulo": "Picle Rick",
-      "descripcion": "No se",
-      "imagenUrl": "assets/images/Bestia1.jpg"
-    },
-    {
-      "titulo": "prueba4",
-      "descripcion": "tatatt",
-      "imagenUrl": "https://images.pexels.com/photos/31095029/pexels-photo-31095029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      "id": "74AKls3DdZU"
+      "titulo": "La agonía de las bestias",
+      "descripcion": "Ilustración tradicional en tinta y escala de grises titulada. La pieza se centra en la brutalidad de un mundo oscuro, donde dos bestias son atrapadas por las garras de entidades.",
+      "imagenUrl": "assets/images/Agonia.jpg"
     },
     {
       "titulo": "Jhon Robot",
-      "descripcion": "wweawe",
+      "descripcion": "Un amigable droide diseñado para control de masas durante protestas en la Ciudad de los Sueños. Listo para comenzar su jornada de trabajo.",
       "imagenUrl": "assets/images/JhonRobot.PNG",
       "id": "u7UcrqFR-jI"
     },
     {
-      "titulo": "hgh",
-      "descripcion": "ghh",
-      "imagenUrl": "https://images.pexels.com/photos/7330282/pexels-photo-7330282.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "titulo": "Shogun",
+      "descripcion": "Ilustración tradicional en escala de grises. La pieza destaca por su detallado arte lineal en tinta, retratando a dos bestias con armaduras tradicionales samurái, sode y dou.",
+      "imagenUrl": "assets/images/Shogun.jpg",
       "id": "NGNboCfCUjY"
     }
   ],
