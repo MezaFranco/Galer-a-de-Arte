@@ -1,13 +1,20 @@
+<!-- ============================================
+     TOPBAR - Barra superior con título y menú
+     ============================================ -->
 <header class="topbar">
+  <!-- Título principal de la aplicación -->
   <h1>Galería de Imagenes</h1>
 
+  <!-- Contenedor del menú hamburguesa con soporte para teclado (tabindex) -->
   <div class="menu-container" tabindex="0">
+    <!-- Botón del menú hamburguesa -->
     <button class="menu-trigger" aria-haspopup="true" aria-label="Menú de opciones" type="button" (click)="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
+    <!-- Menú desplegable - se muestra cuando menuAbierto es true -->
     <div class="menu-dropdown" *ngIf="menuAbierto">
       <button class="menu-item" type="button" (click)="openForm()">
         Agregar imagen
@@ -16,29 +23,56 @@
   </div>
 </header>
 
+<!-- ============================================
+     FORMULARIO MODAL - Para agregar o editar imágenes
+     ============================================ -->
+<!-- Overlay oscuro que cubre toda la pantalla al abrir el formulario -->
 <div class="form-overlay" *ngIf="mostrarForm" (click)="cerrarFormulario()">
+  <!-- Modal del formulario - stopPropagation evita que el click cierre el modal al hacer click dentro -->
   <div class="formulario modal" (click)="$event.stopPropagation()">
+    <!-- Título dinámico: cambia entre "Agregar" y "Modificar" según el estado -->
     <h3>{{ editando ? 'Modificar imagen' : 'Agregar nueva imagen' }}</h3>
+    
+    <!-- Campo para el título de la imagen -->
     <input [(ngModel)]="nuevoDibujo.titulo" placeholder="Título">
+    
+    <!-- Campo para la descripción de la imagen -->
     <input [(ngModel)]="nuevoDibujo.descripcion" placeholder="Descripción">
+    
+    <!-- Campo para la URL de la imagen -->
     <input [(ngModel)]="nuevoDibujo.imagenUrl" placeholder="URL de la imagen">
+    
+    <!-- Contenedor de botones de acción del formulario -->
     <div class="form-actions">
+      <!-- Botón principal: texto dinámico según si está guardando o si es edición/agregado -->
       <button type="button" (click)="agregar()" [disabled]="guardando">
         {{ guardando ? 'Guardando...' : (editando ? 'Actualizar' : 'Agregar') }}
       </button>
+      <!-- Botón para cerrar el formulario sin guardar -->
       <button type="button" class="secondary" (click)="cerrarFormulario()">Cancelar</button>
     </div>
   </div>
 </div>
 
+<!-- ============================================
+     CARRUSEL - Vista horizontal de imágenes (Trip style)
+     ============================================ -->
+<!-- Solo se muestra si hay al menos una imagen -->
 <div class="carrusel-trip" *ngIf="dibujos.length > 0">
-  <ul class="carousel" #carouselRef>
+  <ul 
+    class="carousel" 
+    #carouselRef
+    [class.libre]="animationFrameId"
+    (mousemove)="manejarMovimientoMouse($event)" 
+    (mouseleave)="detenerScrollMouse(); iniciarAutoSlide()"
+  >
     <li
       *ngFor="let dibujo of dibujos; let i = index"
       class="day-card"
       [attr.data-num]="'#' + (i + 1)"
     >
       <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo" (click)="abrirLightbox(dibujo)">
+      
       <div class="meta">
         <h2>{{ dibujo.titulo }}</h2>
         <p class="desc">{{ dibujo.descripcion }}</p>
@@ -47,25 +81,52 @@
   </ul>
 </div>
 
+<!-- ============================================
+     SECCIÓN DE TARJETAS - Todas las imágenes
+     ============================================ -->
+<!-- Título de la sección de galería completa -->
 <div class="seccion-titulo">Todas las imágenes</div>
 
+<!-- Grid de tarjetas con todas las imágenes -->
 <div class="galeria">
+  <!-- Iteración sobre cada dibujo para mostrar una tarjeta -->
   <div *ngFor="let dibujo of dibujos" class="tarjeta">
+    <!-- Imagen de la tarjeta - al hacer click abre el lightbox -->
     <img [src]="dibujo.imagenUrl" [alt]="dibujo.titulo" (click)="abrirLightbox(dibujo)">
+    
+    <!-- Título de la imagen -->
     <h3>{{ dibujo.titulo }}</h3>
+    
+    <!-- Descripción de la imagen -->
     <p>{{ dibujo.descripcion }}</p>
     
+    <!-- Contenedor de botones de acción de la tarjeta -->
     <div class="tarjeta-actions">
+      <!-- Botón para editar la imagen -->
       <button class="btn-editar" (click)="editar(dibujo)">Editar</button>
+      <!-- Botón para eliminar la imagen -->
       <button class="btn-eliminar" (click)="eliminar(dibujo.id!)">Eliminar</button>
     </div>
   </div>
 </div>
 
+<!-- ============================================
+     LIGHTBOX - Visor de imágenes a pantalla completa
+     ============================================ -->
+<!-- Overlay del lightbox - se muestra cuando lightboxAbierto es true -->
 <div class="lightbox-overlay" *ngIf="lightboxAbierto" (click)="cerrarLightbox()">
+  <!-- Botón de cierre del lightbox -->
   <button class="lightbox-cerrar" (click)="cerrarLightbox()">✕</button>
+  
+  <!-- Imagen ampliada - stopPropagation evita que el click cierre el lightbox -->
   <img [src]="lightboxImagen" [alt]="lightboxTitulo" (click)="$event.stopPropagation()">
+  
+  <!-- Título de la imagen mostrada en el lightbox -->
   <div class="lightbox-titulo">{{ lightboxTitulo }}</div>
 </div>
 
+<!-- ============================================
+     TOAST - Notificación temporal
+     ============================================ -->
+<!-- Mensaje flotante que aparece temporalmente para notificar acciones al usuario -->
 <div class="toast" [class.visible]="toastVisible">{{ toastMensaje }}</div>

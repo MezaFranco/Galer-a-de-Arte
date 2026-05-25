@@ -27,8 +27,6 @@ export class AppComponent implements OnInit, OnDestroy {
   // NUEVAS VARIABLES PARA LA EDICIÓN
   editando = false; 
 
-  private intervaloAuto: any;
-
   constructor(
     private drawingService: DrawingService,
     private cdr: ChangeDetectorRef
@@ -42,8 +40,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.detenerAutoSlide();
   }
 
+  // VARIABLES DE CONTROL PARA AMBOS SISTEMAS
+  private intervaloAuto: any;
+  public animationFrameId: any;
+
+  // --- SISTEMA 1: GIRO AUTOMÁTICO BASE ---
   iniciarAutoSlide() {
-    this.detenerAutoSlide();
+    if (this.intervaloAuto) return; // Evita duplicar timers
+
     this.intervaloAuto = setInterval(() => {
       const el = this.carouselRef?.nativeElement;
       if (!el) return;
@@ -61,6 +65,62 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.intervaloAuto) {
       clearInterval(this.intervaloAuto);
       this.intervaloAuto = null;
+    }
+  }
+
+  // --- SISTEMA 2: ACELERACIÓN Y DIRECCIÓN POR PROXIMIDAD ---
+  manejarMovimientoMouse(event: MouseEvent) {
+    const el = this.carouselRef?.nativeElement;
+    if (!el) return;
+
+    // REGLA DE ORO: En cuanto el mouse entra al carrusel, el auto-slide SE APAGA por completo
+    this.detenerAutoSlide();
+
+    const rect = el.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left; 
+    const anchoContenedor = rect.width;
+
+    // Zona límite interactiva (20% en los extremos derecho e izquierdo)
+    const zonaLimite = anchoContenedor * 0.20; 
+    let velocidad = 0;
+
+    if (mouseX > anchoContenedor - zonaLimite && mouseX <= anchoContenedor) {
+      // El mouse está en el extremo derecho -> Desliza hacia adelante
+      const factorPorcentaje = (mouseX - (anchoContenedor - zonaLimite)) / zonaLimite;
+      velocidad = factorPorcentaje * 16; 
+    } else if (mouseX < zonaLimite && mouseX >= 0) {
+      // El mouse está en el extremo izquierdo -> Desliza hacia atrás
+      const factorPorcentaje = (zonaLimite - mouseX) / zonaLimite;
+      velocidad = -factorPorcentaje * 16;
+    }
+
+    if (velocidad !== 0) {
+      // Si el mouse está en los extremos, se activa el scroll fluido por hardware
+      this.ejecutarScrollFluido(velocidad);
+    } else {
+      // SI NO ESTÁ EN LOS EXTREMOS (está sobre una imagen o en el centro):
+      // Frenamos el scroll por mouse a cero absoluto. No arranca el auto-slide hasta que saques el mouse.
+      this.detenerScrollMouse();
+    }
+  }
+
+  private ejecutarScrollFluido(velocidad: number) {
+    this.detenerScrollMouse(); // Evita que se dupliquen los frames de animación
+
+    const animar = () => {
+      const el = this.carouselRef?.nativeElement;
+      if (el) {
+        el.scrollLeft += velocidad;
+        this.animationFrameId = requestAnimationFrame(animar);
+      }
+    };
+    this.animationFrameId = requestAnimationFrame(animar);
+  }
+
+  detenerScrollMouse() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
     }
   }
 

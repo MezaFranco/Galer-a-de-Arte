@@ -606,8 +606,8 @@ h1 {
 }
 
 .tarjeta-actions .btn-editar:hover {
-  background-color: #fff;
-  border-color: #fff;
+  background-color: #cecece;
+  border-color: #cecece;
   color: #000000;
   transform: scale(1.02);
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
@@ -626,4 +626,10 @@ h1 {
   color: #000000;
   transform: scale(1.02);
   box-shadow: 0 0 12px rgba(205, 55, 55, 0.6);
+}
+
+/* Nueva clase para liberar el scroll cuando el mouse toma el control */
+.carousel.libre {
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
 }
